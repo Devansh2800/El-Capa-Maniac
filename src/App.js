@@ -1,23 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Navbar, NavbarBrand } from 'reactstrap';
-import Menu from './components/MenuComponent';
+import MainComponent from './components/MainComponent';
 import './App.css';
+import { Component } from 'react';
 
-function App() {
+class App extends Component{
     
+    render() {
         return (
             <div >
-                <Navbar dark color="primary">
-                    <div className="container">
-                        <NavbarBrand href="/">Here Some bootstap</NavbarBrand>
-                    </div>
-                </Navbar>
-            <Menu/>
+                <MainComponent/>
             </div>
         );
-    
-  
-}
+    }
+        
+ }
 
 export default App;
