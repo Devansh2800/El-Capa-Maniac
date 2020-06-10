@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reac
 function RenderCard({ item }) {
     return (
         <Card>
-            <CardImg src={item.image} alt={item.name} />
+            <CardImg width="100%" src={item.image} alt={item.name} />
             <CardBody>
                 <CardTitle>{item.title}</CardTitle>
                 {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
