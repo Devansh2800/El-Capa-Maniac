@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\src",
     "\\src\\assets",
     "\\src\\assets\\images",
     "\\src\\components",
     "\\src\\shared"
   ],
-  "SelectedNode": "\\src\\components\\DishdetailComponent.js",
+  "SelectedNode": "\\src\\components\\ContactComponent.js",
   "PreviewInSolutionExplorer": false
 }
