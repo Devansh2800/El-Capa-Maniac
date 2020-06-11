@@ -81,7 +81,7 @@ function RenderComments({ cmnts }) {
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.comments} />
+                        <RenderComments cmnts={props.comments} />
                     </div>
                 </div>
             </div>    
