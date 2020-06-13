@@ -6,6 +6,7 @@
     "\\src\\assets",
     "\\src\\assets\\images",
     "\\src\\components",
+    "\\src\\redux",
     "\\src\\shared"
   ],
   "SelectedNode": "\\src\\components\\ContactComponent.js",
