@@ -3,7 +3,7 @@ import {Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem
     Modal, ModalHeader, ModalBody, Row, Label, Col} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form';
-    
+import { Loading } from './LoadingComponent';
 
 function RenderDish({ dish }) {
         if (dish != null) {
@@ -23,20 +23,20 @@ function RenderDish({ dish }) {
             );
         }
     }
-function RenderComments({ cmnts }) {
-        if (cmnts != null) {
-            const comments = cmnts.map(comment => {
+function RenderComments({ comments, addComment, dishId }) {
+        if (comments != null) {
+            const comment = comments.map(comm => {
                 return (
-                    <li key={comment.id}>
-                        <p>{comment.comment}</p>
-                        <p>-- {comment.author},
+                    <li key={comm.id}>
+                        <p>{comm.comment}</p>
+                        <p>-- {comm.author},
                         &nbsp;
                             {
-                                new Intl.DateTimeFormat('en-US', {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: '2-digit'
-                                }).format(new Date(Date.parse(comment.date)))}
+                                new Intl.DateTimeFormat("en-US", {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "2-digit"
+                                }).format(Date.parse(comm.date))}
                         </p>
                     </li>
                     );
@@ -46,9 +46,9 @@ function RenderComments({ cmnts }) {
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     <ul className='list-unstyled'>
-                        {comments}
+                        {comment}
                     </ul>
-                    <CommentForm />
+                    <CommentForm dishId={dishId} addComment={addComment} />
                 </div>
                 
                 );
@@ -61,12 +61,30 @@ function RenderComments({ cmnts }) {
     }
 
 
-    const DishDetail=(props)=> {
-        const dish = props.dish;
-        if (dish == null) {
-            return (<div></div>);
-        }
-        
+const DishDetail = (props) => {
+    const dish = props.dish;
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+
+    }
+    else if (props.errmess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4> {props.errmess}</h4>
+                </div>
+            </div>
+            
+            );
+    }
+       
+    else if (props.dish != null) {
         return (
             <div className="container">
                 <div className='row'>
@@ -84,12 +102,15 @@ function RenderComments({ cmnts }) {
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments cmnts={props.comments} />
+                        <RenderComments comments={props.comments} addComment={props.addComment} dishId={props.dish.id} />
                     </div>
                 </div>
-            </div>    
+            </div>
         );
     }
+    }
+        
+        
 
 
 export default DishDetail;
@@ -112,8 +133,7 @@ export class CommentForm extends Component {
     }
     handleSubmit(values) {
         this.toggleModal();
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
     render() {
         return (
