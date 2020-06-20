@@ -11,28 +11,26 @@ class Header extends Component {
             isNavOpen: false,
             isModalOpen: false
         };
-        this.toggleNav = this.toggleNav.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
+        
     }
-    toggleNav() {
+    toggleNav=()=> {
         this.setState({
             isNavOpen:!this.state.isNavOpen
         });
     }
-    toggleModal() {
+    toggleModal=() =>{
         this.setState({
             isModalOpen: !this.state.isModalOpen
-        });
+        })
     }
-    handleLogin(event) {
+    handleLogin=(event)=> {
         this.toggleModal();
         alert("Username: " + this.username.value + "Password: " + this.password.value + "Remember: " + this.remember.checked);
-        event.preventDefault();
+        event.preventDefault()
     }
     render() {
         return (
-            <React.Fragment>
+            <>
                 <Navbar  dark extend ="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav}/>
@@ -89,7 +87,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </Jumbotron>
-                <Modal isOpen={this.isModalOpen} toggle={this.toggleModal}>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal} > Login</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleLogin}>
@@ -114,7 +112,7 @@ class Header extends Component {
                         </Form>
                     </ModalBody>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }
