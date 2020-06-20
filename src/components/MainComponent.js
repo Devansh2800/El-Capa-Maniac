@@ -6,7 +6,7 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import Footer from './FooterComponent';
 import About from './AboutComponent.js';
-import { addComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreator';
+import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreator';
 import { actions } from 'react-redux-form';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => ({
     fetchDishes: () => { dispatch(fetchDishes())},
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
     resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromos: () => { dispatch(fetchPromos()) }
@@ -62,7 +62,7 @@ class MainComponent extends Component {
                     isLoading={this.props.dishes.isLoading}
                     errmess={this.props.dishes.errmess}
                     comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
-                    addComment={this.props.addComment} 
+                    postComment={this.props.postComment} 
                     commentsErrMess={this.props.comments.errmess} />
 
             );
